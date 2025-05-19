@@ -1,100 +1,299 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Explore Maryem's professional journey through an interactive gamified experience showcasing her leadership and impact.">
+  <meta property="og:title" content="Maryem's Professional Journey">
+  <meta property="og:description" content="Join Maryem on an interactive adventure through her impactful roles at Fidness, AIESEC Turkey, and leadership in JCI and Scouting.">
+  <meta property="og:image" content="https://your-repo-url/thumbnail.jpg">
   <title>Maryem's Professional Journey</title>
-  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Merriweather:ital,wght@0,400;0,700;1,400&display=swap" as="style">
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Merriweather:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="favicon.png">
+
   <style>
+    :root {
+      --primary-color: #2c5282;
+      --accent-color: #4299e1;
+      --accent-dark: #2b6cb0;
+      --accent-darker: #1a4971;
+      --error-color: #e53e3e;
+      --success-color: #38a169;
+      --background-light: #f0f4f8;
+      --spacing-large: 30px;
+      --spacing-medium: 20px;
+      --spacing-small: 10px;
+    }
+
     body {
       font-family: 'Lato', sans-serif;
       text-align: center;
       margin: 0;
-      padding: 20px;
-      background: url('https://www.transparenttextures.com/patterns/cream-pixels.png') #f0f4f8;
-      color: #333;
+      padding: var(--spacing-medium);
+      background: url('https://www.transparenttextures.com/patterns/cream-pixels.png') var(--background-light);
+      color: #333333;
+      font-size: 1.1em;
+      line-height: 1.7;
     }
+
     .hidden {
       display: none;
     }
-    .fade-in {
-      animation: fadeIn 0.5s ease-in;
+
+    .section {
+      max-width: 700px;
+      margin: var(--spacing-medium) auto;
+      padding: var(--spacing-medium);
+      background-color: rgba(255, 255, 240, 0.95);
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      opacity: 0;
+      transition: opacity 0.5s ease-in;
     }
+
+    .section.fade-in {
+      opacity: 1;
+    }
+
     @keyframes fadeIn {
       from { opacity: 0; }
       to { opacity: 1; }
     }
-    h1, h2, h3, h4 {
-      color: #2c5282;
+
+    h1 {
+      color: var(--primary-color);
+      font-size: 2.5em;
+      font-weight: 700;
+      margin: 0.5em 0;
     }
+
+    h2 {
+      color: var(--primary-color);
+      font-size: 2em;
+      font-weight: 700;
+      margin: 0.5em 0;
+    }
+
+    h3 {
+      color: var(--primary-color);
+      font-size: 1.5em;
+      font-weight: 700;
+      margin: 0.5em 0;
+    }
+
+    h4 {
+      color: var(--primary-color);
+      font-size: 1.3em;
+      font-weight: 700;
+      margin: 0.5em 0;
+    }
+
+    p {
+      margin: 0.5em 0;
+      font-size: 1.1em;
+      font-weight: 400;
+    }
+
     button {
       padding: 12px 24px;
-      font-size: 16px;
-      margin: 10px;
-      background-color: #4299e1;
+      font-size: 1em;
+      font-weight: 400;
+      margin: var(--spacing-small);
+      background-color: var(--accent-color);
       color: white;
       border: none;
       border-radius: 5px;
       cursor: pointer;
       transition: background-color 0.3s, transform 0.2s;
     }
+
     button:hover {
-      background-color: #2b6cb0;
+      background-color: var(--accent-dark);
       transform: scale(1.05);
     }
+
+    button:active {
+      background-color: var(--accent-darker);
+      transform: scale(0.95);
+    }
+
+    button:focus {
+      outline: 2px solid var(--accent-color);
+      outline-offset: 2px;
+    }
+
     .map-button::before {
       content: '🌍';
       margin-right: 8px;
-      font-size: 18px;
+      font-size: 1.2em;
     }
-    .section {
-      max-width: 700px;
-      margin: 20px auto;
-      padding: 20px;
-      background-color: rgba(255, 255, 255, 0.95);
-      border-radius: 10px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    }
+
     input {
       padding: 8px;
-      font-size: 16px;
-      margin: 10px;
+      font-size: 1em;
+      font-weight: 400;
+      margin: var(--spacing-small);
       border-radius: 5px;
       border: 1px solid #ccc;
     }
-    .feedback {
-      color: red;
-      font-size: 14px;
-      margin-top: 10px;
+
+    input:focus {
+      outline: 2px solid var(--accent-color);
+      outline-offset: 2px;
     }
+
+    #fidness-hint {
+      color: var(--error-color);
+      font-size: 1em;
+      font-weight: 700;
+      margin-top: var(--spacing-small);
+    }
+
+    #fidness-hint.success {
+      color: var(--success-color);
+    }
+
+    #turkey-feedback {
+      color: var(--error-color);
+      font-size: 1em;
+      font-weight: 700;
+      margin-top: var(--spacing-small);
+    }
+
     #progress {
-      font-size: 14px;
-      color: #2c5282;
-      margin-bottom: 10px;
+      font-size: 1em;
+      font-weight: 400;
+      color: var(--primary-color);
+      margin-bottom: var(--spacing-small);
     }
+
+    #progress-bar {
+      width: 100%;
+      background: #ddd;
+      height: 10px;
+      border-radius: 5px;
+      margin-bottom: var(--spacing-small);
+    }
+
+    #progress-fill {
+      width: 0%;
+      background: var(--accent-color);
+      height: 100%;
+      border-radius: 5px;
+      transition: width 0.3s ease;
+    }
+
     .jci-step {
       display: flex;
       align-items: flex-start;
-      gap: 20px;
-      margin-bottom: 30px;
+      gap: var(--spacing-medium);
+      margin-bottom: var(--spacing-large);
       text-align: left;
     }
+
     .jci-step img {
-      width: 180px;
+      max-width: 180px;
+      width: 100%;
+      height: auto;
       border-radius: 8px;
       box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-      margin-left: 10px;
-      object-fit: cover;
+      margin-left: var(--spacing-small);
+      object-fit: contain;
       background: #eee;
     }
+
     ul {
       list-style-position: inside;
       text-align: left;
       max-width: 500px;
-      margin: 10px auto;
+      margin: var(--spacing-small) auto;
+      font-size: 1.1em;
+      font-weight: 400;
     }
+
+    .quote {
+      margin-top: var(--spacing-large);
+      font-family: 'Merriweather', serif;
+      font-weight: 700;
+      font-size: 1.1em;
+      color: var(--primary-color);
+    }
+
+    .logo-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: var(--spacing-large);
+      margin-bottom: 28px;
+    }
+
+    .fidness-logos img {
+      max-width: 100px;
+      height: 56px;
+      border-radius: 8px;
+      background: #fff;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      object-fit: contain;
+    }
+
+    .image-gallery {
+      display: flex;
+      justify-content: center;
+      gap: var(--spacing-medium);
+      margin: var(--spacing-large) 0;
+    }
+
+    .turkey-images img {
+      max-width: 200px;
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      background: #fff;
+      object-fit: contain;
+    }
+
+    #treasure-popup {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: rgba(255, 255, 240, 0.95);
+      padding: var(--spacing-medium);
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(255, 215, 0, 0.7);
+      z-index: 1000;
+      text-align: center;
+      max-width: 60vw;
+      animation: glow 2s infinite alternate;
+    }
+
+    @keyframes glow {
+      from { box-shadow: 0 0 10px rgba(255, 215, 0, 0.5), 0 0 20px rgba(255, 215, 0, 0.3); }
+      to { box-shadow: 0 0 20px rgba(255, 215, 0, 0.7), 0 0 30px rgba(255, 215, 0, 0.5); }
+    }
+
+    #treasure-popup h2 {
+      font-size: clamp(1.5em, 3vw, 2em);
+      color: var(--accent-color);
+      margin: var(--spacing-small) 0;
+    }
+
+    #treasure-popup p {
+      font-size: clamp(1em, 2.5vw, 1.2em);
+      line-height: clamp(1.4, 1.6, 1.8);
+      color: var(--primary-color);
+      word-break: break-word;
+      max-width: 100%;
+      margin: 0 auto var(--spacing-medium);
+    }
+
+    #treasure-popup button {
+      margin-top: var(--spacing-medium);
+    }
+
     @media (max-width: 700px) {
       .section {
         max-width: 98vw;
@@ -103,269 +302,335 @@
         width: 90%;
         box-sizing: border-box;
       }
-      h1, h2, h3, h4 {
-        font-size: 1.5em;
+      h1 { font-size: 2em; }
+      h2 { font-size: 1.6em; }
+      h3 { font-size: 1.2em; }
+      h4 { font-size: 1.1em; }
+      p, ul, .quote {
+        font-size: 0.9em;
+      }
+      button, input {
+        font-size: 0.9em;
       }
       .jci-step {
         flex-direction: column;
         align-items: center;
       }
       .jci-step img {
-        margin: 20px 0 0 0;
-        width: 90vw;
-        max-width: 350px;
+        margin: var(--spacing-medium) 0 0 0;
+        max-width: 90vw;
       }
       ul {
         max-width: 90%;
+      }
+      .logo-container {
+        flex-direction: column;
+        gap: 15px;
+      }
+      .image-gallery {
+        flex-direction: column;
+        gap: 15px;
+      }
+      .turkey-images img {
+        max-width: 90vw;
+      }
+      #treasure-popup {
+        padding: var(--spacing-small);
+        max-width: 85vw;
+      }
+      #treasure-popup h2 {
+        font-size: clamp(1.2em, 4vw, 1.6em);
+      }
+      #treasure-popup p {
+        font-size: clamp(0.9em, 3vw, 1.1em);
+        line-height: 1.5;
       }
     }
   </style>
 </head>
 <body>
-  <!-- Welcome Screen -->
-  <div id="welcome" class="section fade-in">
-    <h1>Beyond the Résumé</h1>
-    <p>Growth is never accidental. Here's the map of mine!</p>
-    <button onclick="startJourney()">Uncover the Path</button>
-  </div>
+  <main id="main-content">
+    <div id="welcome" class="section fade-in">
+      <h1>Beyond the Résumé</h1>
+      <p>Growth is never accidental. Here's the map of mine!</p>
+      <button onclick="startJourney()">Uncover the Path</button>
+    </div>
 
-  <!-- Map Screen -->
-  <div id="map" class="section hidden">
-    <h2>Choose a Destination</h2>
-    <div id="progress">Progress: 0/3 destinations explored</div>
-    <button class="map-button" onclick="showTask('fidness')">Fidness - Product Owner</button>
-    <button class="map-button" onclick="showTask('turkey')">Turkey - AIESEC Volunteer</button>
-    <button class="map-button" onclick="showTask('leadership')">Leadership Roles</button>
-  </div>
+    <nav id="map" class="section hidden">
+      <h2>Choose a Destination</h2>
+      <div id="progress-bar">
+        <div id="progress-fill"></div>
+      </div>
+      <div id="progress">Progress: 0/3 destinations explored</div>
+      <button class="map-button" onclick="showTask('fidness')" aria-label="Explore Fidness - Product Owner role">Fidness - Product Owner</button>
+      <button class="map-button" onclick="showTask('turkey')" aria-label="Explore Turkey - AIESEC Volunteer experience">Turkey - AIESEC Volunteer</button>
+      <button class="map-button" onclick="showTask('leadership')" aria-label="Explore Leadership Roles">Leadership Roles</button>
+    </nav>
 
-  <!-- Task: Fidness -->
-  <div id="task-fidness" class="section hidden">
-    <h2>Prioritize Features for a Loyalty App</h2>
-    <p>Enter the order (e.g: C, A, B):</p>
-    <ul>
-      <li>A) Points-Based Reward System</li>
-      <li>B) Reward Redemption</li>
-      <li>C) Basic Login</li>
-    </ul>
-    <input type="text" id="fidness-answer" placeholder="C, B, A" />
-    <button onclick="checkFidness()">Submit</button>
-    <p id="fidness-hint" style="display: none; margin-top: 10px; font-weight: bold;"></p>
-  </div>
+    <div id="task-fidness" class="section hidden">
+      <h2>Prioritize Features for a Loyalty App</h2>
+      <p>Enter the order (e.g: C, A, B):</p>
+      <ul>
+        <li>A) Points-Based Reward System</li>
+        <li>B) Reward Redemption</li>
+        <li>C) Basic Login</li>
+      </ul>
+      <input type="text" id="fidness-answer" placeholder="C, B, A" aria-label="Enter feature order for Fidness task">
+      <button onclick="checkFidness()" aria-label="Submit your answer for Fidness task">Submit</button>
+      <p id="fidness-hint" style="display: none;"></p>
+    </div>
 
-  <!-- Details: Fidness -->
-  <div id="details-fidness" class="section hidden">
-    <h2>Product Owner at Fidness</h2>
-    <p style="margin-bottom: 24px; font-size: 1.1em; line-height: 1.7;">
-      As a Product Owner,<br>
-      I was the vital link connecting visionary clients with skilled developers to craft loyalty apps that truly resonate with users.
+    <div id="details-fidness" class="section hidden">
+      <h2>Product Owner at Fidness</h2>
+      <p>
+        As a Product Owner,<br>
+        I was the vital link connecting visionary clients with skilled developers to craft loyalty apps that truly resonate with users.
+      </p>
+      <p>
+        By listening deeply and thinking creatively with my team,<br>
+        we transformed ideas into innovative, user-focused solutions that delighted business owners.
+      </p>
+      <p>
+        Proud to have driven the success of standout apps for
+        <span style="font-weight: 700; color: var(--primary-color);">Para El Farabi</span> and
+        <span style="font-weight: 700; color: var(--primary-color);">Eric Kayser</span> -
+        proving that great products start with empathy and bold thinking.
+      </p>
+      <div class="logo-container fidness-logos">
+        <img src="para.jpeg" alt="Para El Farabi loyalty app logo" loading="lazy">
+        <img src="eric.jpg" alt="Eric Kayser loyalty app logo" loading="lazy">
+      </div>
+      <button onclick="backToMap()" aria-label="Return to the destination map">Back to Map</button>
+    </div>
+
+    <div id="task-turkey" class="section hidden">
+      <h2>Which Skill Did I Use Most in Turkey?</h2>
+      <button onclick="checkTurkey('A')" aria-label="Select Adaptability as the most used skill in Turkey">A) Adaptability</button>
+      <button onclick="checkTurkey('B')" aria-label="Select Coding as the most used skill in Turkey">B) Coding</button>
+      <button onclick="checkTurkey('C')" aria-label="Select Cooking as the most used skill in Turkey">C) Cooking</button>
+      <p id="turkey-feedback" style="display: none;"></p>
+    </div>
+
+    <div id="details-turkey" class="section hidden">
+      <h2>AIESEC Volunteer in Turkey</h2>
+      <p>Highlights of my volunteer journey in Turkey:</p>
+      <ul>
+        <li>Led workshops engaging 50+ youth from diverse backgrounds</li>
+        <li>Planned and executed activities for learning, self-growth, and cultural exchange</li>
+        <li>Built strong intercultural communication and leadership skills</li>
+        <li>Invited back as the only volunteer for a second term</li>
+        <li>Fostered community spirit and personal growth among participants</li>
+      </ul>
+      <div class="image-gallery turkey-images">
+        <img src="course.jpg" alt="Maryem planning workshops in Turkey" loading="lazy">
+        <img src="emploi.jpg" alt="Maryem leading activities for youth in Turkey" loading="lazy">
+        <img src="turkey.jpg" alt="Maryem engaging in cultural exchange in Turkey" loading="lazy">
+      </div>
+      <p class="quote" style="font-style: italic;">
+        These experiences enhanced my leadership skills, and ignited a lifelong passion for community development and collaboration.
+      </p>
+      <button onclick="backToMap()" aria-label="Return to the destination map">Back to Map</button>
+    </div>
+
+    <div id="leadership-roles" class="section hidden">
+      <h2>Leadership Roles</h2>
+      <button onclick="showDetails('jci')" aria-label="View My JCI Path">My JCI Path</button>
+      <button onclick="showDetails('scout')" aria-label="View The Scout in Me">The Scout in Me</button>
+      <button onclick="backToMap()" aria-label="Return to the destination map">Back to Map</button>
+    </div>
+
+    <div id="details-jci" class="section hidden">
+      <h2>My JCI Path</h2>
+      <div class="jci-step">
+        <div style="flex:1;">
+          <h4>The Eager Member</h4>
+          <p>
+            I stepped into JCI TBS with curiosity and drive, joining impactful projects and dynamic events. Every challenge sharpened my skills – from public speaking to teamwork – as I led by example with passion and purpose.
+          </p>
+        </div>
+        <img src="jobfair.jpg" alt="Maryem speaking at a JCI TBS job fair event" loading="lazy">
+      </div>
+      <div class="jci-step">
+        <div style="flex:1;">
+          <h4>The VPFD Chapter</h4>
+          <p>
+            Becoming Vice President in charge of Formation and Development was a milestone – and a mission. My goal: to unify the JCI TBS family and ensure that every member had a space to learn, grow, and thrive.
+          </p>
+        </div>
+        <img src="theteam.jpg" alt="Maryem with the JCI TBS team as Vice President" loading="lazy">
+      </div>
+      <div class="jci-step">
+        <div style="flex:1;">
+          <h4>Growth, Personalized</h4>
+          <p>
+            Then I launched tailored training experiences focused on entrepreneurship, marketing, and beyond. Whether members were beginners or experts, they found opportunities to rise – because real leadership means lifting others.
+          </p>
+        </div>
+        <img src="newsletter.jpg" alt="Maryem presenting a JCI training newsletter" loading="lazy">
+      </div>
+      <p class="quote">
+        Leadership is not a title — it’s a responsibility to inspire, connect, and empower.
+      </p>
+      <button onclick="backToLeadership()" aria-label="Return to Leadership Roles">Back to Leadership</button>
+    </div>
+
+    <div id="details-scout" class="section hidden">
+      <h2>The Scout in Me</h2>
+      <div class="jci-step">
+        <div style="flex:1;">
+          <h3>Where It All Began</h3>
+          <p>
+            At just 10 years old, I put on the scout scarf for the first time - and never took it off. My journey began with wonder, discovery, and building genuine human connections that shaped how I see the world today.
+          </p>
+        </div>
+        <img src="young.jpg" alt="Maryem as a young scout at age 10" loading="lazy">
+      </div>
+      <div class="jci-step">
+        <div style="flex:1;">
+          <h3>The Global Citizen</h3>
+          <p>
+            Scouting opened doors beyond borders. Through international programs in Tunisia, I met people from across the globe - becoming a translator, a guide, and a friend. These experiences taught me empathy, adaptability, and true cultural connection.
+          </p>
+        </div>
+        <img src="foreign.jpg" alt="Maryem participating in international scouting programs in Tunisia" loading="lazy">
+      </div>
+      <div class="jci-step">
+        <div style="flex:1;">
+          <h3>Leading With Heart</h3>
+          <p>
+            As a creative young leader, I guided a group of girls for two years - planning activities, coordinating efforts, and creating spaces for growth. My mission: to lead by example, inspire young souls, and be the role model I once looked up to.
+          </p>
+        </div>
+        <img src="leader.jpg" alt="Maryem leading a group of girls as a scout leader" loading="lazy">
+      </div>
+      <p class="quote">
+        Scouting didn't just teach me to survive - it taught me to lead, to care, and to rise.
+      </p>
+      <button onclick="backToLeadership()" aria-label="Return to Leadership Roles">Back to Leadership</button>
+    </div>
+  </main>
+
+  <div id="treasure-popup" class="hidden">
+    <h2 class="highlight">The Final Chapter Unlocked - A New Beginning Awaits</h2>
+    <p>
+      Just like unlocking new opportunities, each chapter of my career has been a key step toward growth, learning, and passion.<br><br>
+      I am genuinely excited about the opportunity to bring this energy and dedication to your team.<br><br>
+      I’m eager to embrace new challenges, expand my skills, and contribute with creativity and commitment.<br><br>
+      This journey is just the beginning - together, we can build something extraordinary.<br><br>
+      Thank you for considering me. I’m ready and motivated to grow, learn, and make a meaningful impact!
     </p>
-    <p style="margin-bottom: 24px; font-size: 1.1em; line-height: 1.7;">
-      By listening deeply and thinking creatively with my team,<br>
-      we transformed ideas into innovative, user-focused solutions that delighted business owners.
-    </p>
-    <p style="margin-bottom: 28px; font-size: 1.1em; line-height: 1.7;">
-      Proud to have driven the success of standout apps for
-      <span style="font-weight: bold; color: #2c5282;">Para El Farabi</span> and
-      <span style="font-weight: bold; color: #2c5282;">Eric Kayser</span> -
-      proving that great products start with empathy and bold thinking.
-    </p>
-    <div style="display: flex; justify-content: center; align-items: center; gap: 30px; margin-bottom: 28px;">
-      <img src="para.jpeg" alt="Para El Farabi Logo"
-        style="height: 56px; width: auto; border-radius: 8px; background: #fff; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
-      <img src="eric.jpg" alt="Eric Kayser Logo"
-        style="height: 56px; width: auto; border-radius: 8px; background: #fff; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
-    </div>
-    <button onclick="backToMap()">Back to Map</button>
-  </div>
-
-  <!-- Task: Turkey -->
-  <div id="task-turkey" class="section hidden">
-    <h2>Which Skill Did I Use Most in Turkey?</h2>
-    <button onclick="checkTurkey('A')">A) Adaptability</button>
-    <button onclick="checkTurkey('B')">B) Coding</button>
-    <button onclick="checkTurkey('C')">C) Cooking</button>
-  </div>
-
-  <!-- Details: Turkey -->
-<div id="details-turkey" class="section hidden">
-    <h2>AIESEC Volunteer in Turkey</h2>
-    <p>Highlights of my volunteer journey in Turkey:</p>
-    <ul>
-      <li>Led workshops engaging 50+ youth from diverse backgrounds</li>
-      <li>Planned and executed activities for learning, self-growth, and cultural exchange</li>
-      <li>Built strong intercultural communication and leadership skills</li>
-      <li>Invited back as the only volunteer for a second term</li>
-      <li>Fostered community spirit and personal growth among participants</li>
-    </ul>
-    <div style="display: flex; justify-content: center; gap: 20px; margin: 30px 0;">
-      <img src="course.jpg" alt="planning" style="height: 200px; width: auto; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); background: #fff;">
-      <img src="emploi.jpg" alt="activities" style="height: 150px; width: auto; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); background: #fff;">
-      <img src="turkey.jpg" alt="cultural change" style="height: 200px; width: auto; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); background: #fff;">
-    </div>
-    <p style="margin-top:30px; font-weight:bold; color:#2c5282;"><em>
-      These experiences enhanced my leadership skills, and ignited a lifelong passion for community development and collaboration.
-    </em></p>
-    <button onclick="backToMap()">Back to Map</button>
-  </div>
-  
-
-  <!-- Leadership Roles -->
-  <div id="leadership-roles" class="section hidden">
-    <h2>Leadership Roles</h2>
-    <button onclick="showDetails('jci')">My JCI Path</button>
-    <button onclick="showDetails('scout')">The Scout in Me</button>
-    <button onclick="backToMap()">Back to Map</button>
-  </div>
-
-  <!-- Details: JCI -->
-  <div id="details-jci" class="section hidden">
-    <h2>My JCI Path</h2>
-    <!-- The Eager Member -->
-    <div class="jci-step">
-      <div style="flex:1;">
-        <h4>The Eager Member</h4>
-        <p>
-          I stepped into JCI TBS with curiosity and drive, joining impactful projects and dynamic events. Every challenge sharpened my skills – from public speaking to teamwork – as I led by example with passion and purpose.
-        </p>
-      </div>
-      <img src="jobfair.jpg" alt="Job Fair">
-    </div>
-    <!-- The VPFD Chapter -->
-    <div class="jci-step">
-      <div style="flex:1;">
-        <h4>The VPFD Chapter</h4>
-        <p>
-          Becoming Vice President in charge of Formation and Development was a milestone – and a mission. My goal: to unify the JCI TBS family and ensure that every member had a space to learn, grow, and thrive.
-        </p>
-      </div>
-      <img src="theteam.jpg" alt="The Team">
-    </div>
-    <!-- Growth, Personalized -->
-    <div class="jci-step">
-      <div style="flex:1;">
-        <h4>Growth, Personalized</h4>
-        <p>
-          Then I launched tailored training experiences focused on entrepreneurship, marketing, and beyond. Whether members were beginners or experts, they found opportunities to rise – because real leadership means lifting others.
-        </p>
-      </div>
-      <img src="newsletter.jpg" alt="Newsletter">
-    </div>
-    <p style="margin-top:30px; font-weight:bold; color:#2c5282;"><em>
-      Leadership is not a title — it’s a responsibility to inspire, connect, and empower.
-    </em></p>
-    <button onclick="backToLeadership()">Back to Leadership</button>
-  </div>
-
-  <!-- Details: Scout -->
-  <div id="details-scout" class="section hidden">
-    <h2>The Scout in Me</h2>
-    <!-- Section 1: Where It All Began -->
-    <div class="jci-step">
-      <div style="flex:1;">
-        <h3>Where It All Began</h3>
-        <p>
-          At just 10 years old, I put on the scout scarf for the first time - and never took it off. My journey began with wonder, discovery, and building genuine human connections that shaped how I see the world today.
-        </p>
-      </div>
-      <img src="young.jpg" alt="Young Scout">
-    </div>
-    <!-- Section 2: The Global Citizen -->
-    <div class="jci-step">
-      <div style="flex:1;">
-        <h3>The Global Citizen</h3>
-        <p>
-          Scouting opened doors beyond borders. Through international programs in Tunisia, I met people from across the globe - becoming a translator, a guide, and a friend. These experiences taught me empathy, adaptability, and true cultural connection.
-        </p>
-      </div>
-      <img src="foreign.jpg" alt="International Scouting">
-    </div>
-    <!-- Section 3: Leading With Heart -->
-    <div class="jci-step">
-      <div style="flex:1;">
-        <h3>Leading With Heart</h3>
-        <p>
-          As a creative young leader, I guided a group of girls for two years - planning activities, coordinating efforts, and creating spaces for growth. My mission: to lead by example, inspire young souls, and be the role model I once looked up to.
-        </p>
-      </div>
-      <img src="leader.jpg" alt="Scout Leader">
-    </div>
-    <p style="margin-top:30px; font-weight:bold; color:#2c5282;"><em>
-      Scouting didn't just teach me to survive - it taught me to lead, to care, and to rise.
-    </em></p>
-    <button onclick="backToLeadership()">Back to Leadership</button>
+    <button onclick="closePopup()" aria-label="Close the treasure chest pop-up">Close</button>
   </div>
 
   <script>
     let progress = 0;
     let fidnessAttempts = 0;
     const visited = new Set();
+    let isFinalPopupShown = false;
+
+    function clearFeedback(elementId) {
+      setTimeout(() => {
+        const element = document.getElementById(elementId);
+        if (element) element.style.display = "none";
+      }, 3000);
+    }
 
     function startJourney() {
-      document.getElementById("welcome").classList.add("hidden");
-      document.getElementById("map").classList.remove("hidden");
-      document.getElementById("map").classList.add("fade-in");
+      const welcome = document.getElementById("welcome");
+      const map = document.getElementById("map");
+      if (welcome && map) {
+        welcome.classList.add("hidden");
+        map.classList.remove("hidden");
+        map.classList.add("fade-in");
+      }
     }
 
     function showTask(section) {
-      document.getElementById("map").classList.add("hidden");
+      const map = document.getElementById("map");
+      if (!map) return;
+      map.classList.add("hidden");
+
       if (section === "leadership") {
         updateProgress("leadership");
-        document.getElementById("leadership-roles").classList.remove("hidden");
-        document.getElementById("leadership-roles").classList.add("fade-in");
+        const leadershipRoles = document.getElementById("leadership-roles");
+        if (leadershipRoles) {
+          leadershipRoles.classList.remove("hidden");
+          leadershipRoles.classList.add("fade-in");
+        }
       } else {
-        document.getElementById(`task-${section}`).classList.remove("hidden");
-        document.getElementById(`task-${section}`).classList.add("fade-in");
+        const taskSection = document.getElementById(`task-${section}`);
+        if (taskSection) {
+          taskSection.classList.remove("hidden");
+          taskSection.classList.add("fade-in");
+        }
         if (section === "fidness") {
-          document.getElementById("fidness-answer").focus();
+          const fidnessAnswer = document.getElementById("fidness-answer");
+          if (fidnessAnswer) fidnessAnswer.focus();
+        } else if (section === "turkey") {
+          const turkeyFeedback = document.getElementById("turkey-feedback");
+          if (turkeyFeedback) turkeyFeedback.style.display = "none";
         }
       }
     }
 
     function showDetails(section) {
-      document.getElementById("leadership-roles").classList.add("hidden");
-      document.getElementById(`details-${section}`).classList.remove("hidden");
-      document.getElementById(`details-${section}`).classList.add("fade-in");
+      const leadershipRoles = document.getElementById("leadership-roles");
+      const detailsSection = document.getElementById(`details-${section}`);
+      if (leadershipRoles && detailsSection) {
+        leadershipRoles.classList.add("hidden");
+        detailsSection.classList.remove("hidden");
+        detailsSection.classList.add("fade-in");
+      }
     }
 
     function checkFidness() {
-      let answer = document
-        .getElementById("fidness-answer")
-        .value.toUpperCase()
-        .replace(/\s/g, "")
-        .replace(/,/g, "");
-
+      const answerInput = document.getElementById("fidness-answer");
       const hintElement = document.getElementById("fidness-hint");
+      const taskFidness = document.getElementById("task-fidness");
+      const detailsFidness = document.getElementById("details-fidness");
+      if (!answerInput || !hintElement || !taskFidness || !detailsFidness) return;
+
+      let answer = answerInput.value.toUpperCase().replace(/\s/g, "").replace(/,/g, "");
 
       if (answer === "CBA") {
         fidnessAttempts = 0;
         updateProgress("fidness");
         hintElement.style.display = "none";
-        document.getElementById("task-fidness").classList.add("hidden");
-        document.getElementById("details-fidness").classList.remove("hidden");
-        document.getElementById("details-fidness").classList.add("fade-in");
+        taskFidness.classList.add("hidden");
+        detailsFidness.classList.remove("hidden");
+        detailsFidness.classList.add("fade-in");
       } else {
         fidnessAttempts++;
         if (fidnessAttempts < 3) {
-          hintElement.style.color = "red";
-          hintElement.textContent = `Try again! Hint: Start with the basics. Attempts left: ${
-            3 - fidnessAttempts
-          }`;
+          hintElement.classList.remove("success");
+          hintElement.textContent = `Try again! Hint: Start with the basics. Attempts left: ${3 - fidnessAttempts}`;
           hintElement.style.display = "block";
+          clearFeedback("fidness-hint");
         } else {
-          hintElement.style.color = "green";
-          hintElement.innerHTML =
-            "The correct order is: <strong>C, B, A</strong>. Keep trying!";
+          hintElement.classList.add("success");
+          hintElement.innerHTML = "The correct order is: <strong>C, B, A</strong>. Keep trying!";
           hintElement.style.display = "block";
+          clearFeedback("fidness-hint");
         }
       }
     }
 
     function checkTurkey(choice) {
+      const feedbackElement = document.getElementById("turkey-feedback");
+      const taskTurkey = document.getElementById("task-turkey");
+      const detailsTurkey = document.getElementById("details-turkey");
+      if (!feedbackElement || !taskTurkey || !detailsTurkey) return;
+
       if (choice === "A") {
         updateProgress("turkey");
-        document.getElementById("task-turkey").classList.add("hidden");
-        document.getElementById("details-turkey").classList.remove("hidden");
-        document.getElementById("details-turkey").classList.add("fade-in");
+        feedbackElement.style.display = "none";
+        taskTurkey.classList.add("hidden");
+        detailsTurkey.classList.remove("hidden");
+        detailsTurkey.classList.add("fade-in");
+      } else {
+        feedbackElement.textContent = "Try again!";
+        feedbackElement.style.display = "block";
+        clearFeedback("turkey-feedback");
       }
     }
 
@@ -373,25 +638,51 @@
       if (!visited.has(section)) {
         visited.add(section);
         progress++;
-        document.getElementById("progress").textContent = `Progress: ${progress}/3 destinations explored`;
+        const progressText = document.getElementById("progress");
+        const progressFill = document.getElementById("progress-fill");
+        if (progressText && progressFill) {
+          progressText.textContent = `Progress: ${progress}/3 destinations explored`;
+          progressFill.style.width = `${(progress / 3) * 100}%`;
+        }
       }
     }
 
     function backToMap() {
       document.querySelectorAll(".section:not(#welcome)").forEach(el => el.classList.add("hidden"));
-      document.getElementById("map").classList.remove("hidden");
-      document.getElementById("map").classList.add("fade-in");
-      document.getElementById("fidness-hint").style.display = "none";
-      document.getElementById("fidness-answer").value = "";
+      const map = document.getElementById("map");
+      const fidnessHint = document.getElementById("fidness-hint");
+      const fidnessAnswer = document.getElementById("fidness-answer");
+      const turkeyFeedback = document.getElementById("turkey-feedback");
+      if (map) {
+        map.classList.remove("hidden");
+        map.classList.add("fade-in");
+      }
+      if (fidnessHint) fidnessHint.style.display = "none";
+      if (fidnessAnswer) fidnessAnswer.value = "";
+      if (turkeyFeedback) turkeyFeedback.style.display = "none";
+
+      if (progress === 3 && !isFinalPopupShown) {
+        const popup = document.getElementById("treasure-popup");
+        if (popup) {
+          popup.style.display = "block";
+          isFinalPopupShown = true;
+        }
+      }
     }
 
     function backToLeadership() {
       document.querySelectorAll(".section:not(#welcome)").forEach(el => el.classList.add("hidden"));
-      document.getElementById("leadership-roles").classList.remove("hidden");
-      document.getElementById("leadership-roles").classList.add("fade-in");
+      const leadershipRoles = document.getElementById("leadership-roles");
+      if (leadershipRoles) {
+        leadershipRoles.classList.remove("hidden");
+        leadershipRoles.classList.add("fade-in");
+      }
+    }
+
+    function closePopup() {
+      const popup = document.getElementById("treasure-popup");
+      if (popup) popup.style.display = "none";
     }
   </script>
 </body>
 </html>
-
-
