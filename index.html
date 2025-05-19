@@ -229,8 +229,8 @@
     }
 
     .fidness-logos img {
-      max-width: 100px;
-      height: 56px;
+      max-height: 56px;
+      width: auto;
       border-radius: 8px;
       background: #fff;
       box-shadow: 0 2px 8px rgba(0,0,0,0.08);
@@ -267,6 +267,8 @@
       z-index: 1000;
       text-align: center;
       max-width: 60vw;
+      max-height: 80vh;
+      overflow-y: auto;
       animation: glow 2s infinite alternate;
     }
 
@@ -292,6 +294,7 @@
 
     #treasure-popup button {
       margin-top: var(--spacing-medium);
+      margin-bottom: var(--spacing-small);
     }
 
     @media (max-width: 700px) {
@@ -337,6 +340,7 @@
       #treasure-popup {
         padding: var(--spacing-small);
         max-width: 85vw;
+        max-height: 85vh;
       }
       #treasure-popup h2 {
         font-size: clamp(1.2em, 4vw, 1.6em);
@@ -368,14 +372,14 @@
     </nav>
 
     <div id="task-fidness" class="section hidden">
-      <h2>Prioritize Features for a Loyalty App</h2>
-      <p>Enter the order (e.g: C, A, B):</p>
+      <h2>Which feature should be prioritized first when building a loyalty app?</h2>
+      <p>Enter your answer (e.g., C):</p>
       <ul>
-        <li>A) Points-Based Reward System</li>
-        <li>B) Reward Redemption</li>
-        <li>C) Basic Login</li>
+        <li>A) Points-based reward system</li>
+        <li>B) Easy reward redemption</li>
+        <li>C) Simple and secure login</li>
       </ul>
-      <input type="text" id="fidness-answer" placeholder="C, B, A" aria-label="Enter feature order for Fidness task">
+      <input type="text" id="fidness-answer" placeholder="Choose the correct answer" aria-label="Enter your answer for Fidness task">
       <button onclick="checkFidness()" aria-label="Submit your answer for Fidness task">Submit</button>
       <p id="fidness-hint" style="display: none;"></p>
     </div>
@@ -426,9 +430,9 @@
         <img src="emploi.jpg" alt="Maryem leading activities for youth in Turkey" loading="lazy">
         <img src="turkey.jpg" alt="Maryem engaging in cultural exchange in Turkey" loading="lazy">
       </div>
-      <p class="quote" style="font-style: italic;">
+      <p class="quote" style="font-style: italic;"><em>
         These experiences enhanced my leadership skills, and ignited a lifelong passion for community development and collaboration.
-      </p>
+      </em></p>
       <button onclick="backToMap()" aria-label="Return to the destination map">Back to Map</button>
     </div>
 
@@ -468,9 +472,9 @@
         </div>
         <img src="newsletter.jpg" alt="Maryem presenting a JCI training newsletter" loading="lazy">
       </div>
-      <p class="quote">
+      <p class="quote" style="font-style: italic;"><em>
         Leadership is not a title — it’s a responsibility to inspire, connect, and empower.
-      </p>
+      </em></p>
       <button onclick="backToLeadership()" aria-label="Return to Leadership Roles">Back to Leadership</button>
     </div>
 
@@ -503,9 +507,9 @@
         </div>
         <img src="leader.jpg" alt="Maryem leading a group of girls as a scout leader" loading="lazy">
       </div>
-      <p class="quote">
+      <p class="quote" style="font-style: italic;"><em>
         Scouting didn't just teach me to survive - it taught me to lead, to care, and to rise.
-      </p>
+      </em></p>
       <button onclick="backToLeadership()" aria-label="Return to Leadership Roles">Back to Leadership</button>
     </div>
   </main>
@@ -524,7 +528,6 @@
 
   <script>
     let progress = 0;
-    let fidnessAttempts = 0;
     const visited = new Set();
     let isFinalPopupShown = false;
 
@@ -590,28 +593,18 @@
       const detailsFidness = document.getElementById("details-fidness");
       if (!answerInput || !hintElement || !taskFidness || !detailsFidness) return;
 
-      let answer = answerInput.value.toUpperCase().replace(/\s/g, "").replace(/,/g, "");
+      let answer = answerInput.value.toUpperCase().trim();
 
-      if (answer === "CBA") {
-        fidnessAttempts = 0;
-        updateProgress("fidness");
+      if (answer === "C") {
         hintElement.style.display = "none";
+        updateProgress("fidness");
         taskFidness.classList.add("hidden");
         detailsFidness.classList.remove("hidden");
         detailsFidness.classList.add("fade-in");
       } else {
-        fidnessAttempts++;
-        if (fidnessAttempts < 3) {
-          hintElement.classList.remove("success");
-          hintElement.textContent = `Try again! Hint: Start with the basics. Attempts left: ${3 - fidnessAttempts}`;
-          hintElement.style.display = "block";
-          clearFeedback("fidness-hint");
-        } else {
-          hintElement.classList.add("success");
-          hintElement.innerHTML = "The correct order is: <strong>C, B, A</strong>. Keep trying!";
-          hintElement.style.display = "block";
-          clearFeedback("fidness-hint");
-        }
+        hintElement.textContent = "Try again!";
+        hintElement.style.display = "block";
+        clearFeedback("fidness-hint");
       }
     }
 
